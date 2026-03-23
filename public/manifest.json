@@ -1,0 +1,21 @@
+{
+  "name": "Prooriente WMS",
+  "short_name": "ProWMS",
+  "description": "Sistema de Gestión de Almacenes (Bodegas) Móvil",
+  "start_url": "/Prooriente/public/",
+  "display": "standalone",
+  "background_color": "#111827",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "assets/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

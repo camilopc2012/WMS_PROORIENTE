@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Prooriente WMS</title>
+
+    <!-- PWA Manifest & Icons -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#111827">
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png">
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="assets/css/app.css">
+</head>
+
+<body>
+    <div id="toast-container"></div>
+
+    <div id="app">
+        <!-- =======================
+             LOGIN SCREEN
+             ======================= -->
+        <main id="login-screen" class="slide-up">
+            <div class="login-header">
+                <img src="assets/images/logo.png" alt="Prooriente Logo" class="login-logo">
+            </div>
+
+            <div class="auth-card">
+                <div class="input-group">
+                    <label for="doc-input">DOCUMENTO DE IDENTIDAD</label>
+                    <input type="text" id="doc-input" class="input-field" placeholder="" autocomplete="off"
+                        autocapitalize="characters">
+                </div>
+
+                <div class="input-group">
+                    <label>PIN DE ACCESO</label>
+                    <div class="pin-display-container">
+                        <div class="pin-dot"></div>
+                        <div class="pin-dot"></div>
+                        <div class="pin-dot"></div>
+                        <div class="pin-dot"></div>
+                    </div>
+                </div>
+
+                <!-- Thumb-Zone Numpad -->
+                <div class="numpad">
+                    <!-- Row 1 -->
+                    <button class="num-btn" data-val="1">1</button>
+                    <button class="num-btn" data-val="2">2</button>
+                    <button class="num-btn" data-val="3">3</button>
+                    <!-- Row 2 -->
+                    <button class="num-btn" data-val="4">4</button>
+                    <button class="num-btn" data-val="5">5</button>
+                    <button class="num-btn" data-val="6">6</button>
+                    <!-- Row 3 -->
+                    <button class="num-btn" data-val="7">7</button>
+                    <button class="num-btn" data-val="8">8</button>
+                    <button class="num-btn" data-val="9">9</button>
+                    <!-- Row 4 -->
+                    <button class="num-btn" style="visibility:hidden;"></button>
+                    <button class="num-btn" data-val="0">0</button>
+                    <button class="num-btn delete" data-val="del"><i class="fa-solid fa-delete-left"></i></button>
+                </div>
+
+                <button id="btn-login" class="btn-primary" style="margin-top:24px; display:none;">
+                    <span id="btn-text">INGRESAR</span>
+                    <div id="btn-spinner" class="spinner"></div>
+                </button>
+            </div>
+        </main>
+
+        <!-- =======================
+             APP SHELL (Dashboard)
+             ======================= -->
+        <main id="main-app">
+            <header class="dashboard-header">
+                <div class="dashboard-user-info">
+                    <h2 id="dash-user-name">Usuario</h2>
+                    <p id="dash-user-rol">Rol - Sucursal</p>
+                </div>
+                <div class="dashboard-avatar" id="dash-user-initials">US</div>
+                
+                <button id="btn-logout" title="Cerrar sesión" style="background:transparent; border:none; color:#dc2626; cursor:pointer; font-size:1.5rem; margin-left: 15px;">
+                    <i class="fa-solid fa-power-off"></i>
+                </button>
+            </header>
+
+            <section class="content-area">
+                <div class="module-grid" id="modules-container">
+                    <!-- Modules injected dynamically via app.js -->
+                </div>
+            </section>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <div class="nav-item active" onclick="goToHome()">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Inicio</span>
+                </div>
+                <div class="nav-item" onclick="openAlertas()">
+                    <i class="fa-solid fa-bell"></i>
+                    <span>Alertas</span>
+                </div>
+                <div class="nav-item" onclick="openAjustes()">
+                    <i class="fa-solid fa-gear"></i>
+                    <span>Ajustes</span>
+                </div>
+            </nav>
+
+            <!-- Dynamic Views Container (Overlays) -->
+            <div id="view-container"></div>
+        </main>
+    </div>
+
+    <!-- Core JS -->
+    <script src="assets/js/api.js?v=6"></script>
+    <script src="assets/js/auth.js?v=6"></script>
+    <script src="assets/js/app.js?v=6"></script>
+    
+    <!-- Feature Modules -->
+    <script src="assets/js/modules/maestros.js?v=6"></script>
+    <script src="assets/js/modules/ajustes.js?v=6"></script>
+    <script src="assets/js/modules/inventario.js?v=6"></script>
+    <script src="assets/js/modules/recepcion.js?v=6"></script>
+    <script src="assets/js/modules/almacenamiento.js?v=6"></script>
+    <script src="assets/js/modules/picking.js?v=6"></script>
+    <script src="assets/js/modules/despacho.js?v=6"></script>
+    <script src="assets/js/modules/devoluciones.js?v=8"></script>
+    <script src="assets/js/modules/permisos.js?v=8"></script>
+    <script src="assets/js/modules/odc.js?v=9"></script>
+    <script src="assets/js/modules/certificacion.js?v=9"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Devolucion extends Model
+{
+    protected $table = 'devoluciones';
+
+    protected $fillable = [
+        'empresa_id', 'sucursal_id', 'recepcion_id', 'numero_devolucion',
+        'proveedor', 'tipo', 'auxiliar_id',
+        'fecha_movimiento', 'hora_inicio', 'hora_fin',
+        'estado', 'motivo_general',
+    ];
+
+    protected $casts = [
+        'fecha_movimiento' => 'date',
+    ];
+
+    const TIPO_AVERIA = 'AProveedorAveria';
+    const TIPO_VENCIDO = 'AProveedorVencido';
+    const TIPO_REINGRESO = 'ReingresoBuenEstado';
+
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class);
+    }
+
+    public function sucursal()
+    {
+        return $this->belongsTo(Sucursal::class);
+    }
+
+    public function recepcion()
+    {
+        return $this->belongsTo(Recepcion::class);
+    }
+
+    public function auxiliar()
+    {
+        return $this->belongsTo(Personal::class, 'auxiliar_id');
+    }
+
+    public function detalles()
+    {
+        return $this->hasMany(DevolucionDetalle::class);
+    }
+
+    public static function generarNumero(int $sucursalId): string
+    {
+        $prefix = 'DEV';
+        $date = date('Ymd');
+        $last = self::where('sucursal_id', $sucursalId)
+            ->where('numero_devolucion', 'like', "{$prefix}-{$date}-%")
+            ->count();
+        return sprintf('%s-%s-%04d', $prefix, $date, $last + 1);
+    }
+}
