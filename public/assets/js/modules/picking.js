@@ -1,93 +1,9 @@
-/**
- * Prooriente WMS - Picking Module
- */
+// picking.js - WMS v2 - Picking FEFO
 window.Picking = {
-    currentRuta: null,
-
-    /* --- RUTAS PENDIENTES --- */
-    getPickingRutasHTML: function() {
-        return `
-            <div style="background:white; border-radius:12px; padding:20px; box-shadow:0 1px 3px rgba(0,0,0,0.05); border:1px solid #e2e8f0; margin-bottom: 20px;">
-                <h4 style="margin:0; color:#0f172a; margin-bottom:16px;">Rutas de Picking Pendientes</h4>
-                ${filterBarHTML('picking-rutas-tbody', '🔍 Buscar por orden o cliente...')}
-                <div style="overflow-x:auto;">
-                    <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.9rem;">
-                        <thead>
-                            <tr style="border-bottom:2px solid #e2e8f0; color:#64748b;">
-                                <th style="padding:10px 8px;">Orden #</th>
-                                <th style="padding:10px 8px;">Cliente</th>
-                                <th style="padding:10px 8px;">Items</th>
-                                <th style="padding:10px 8px;">Estado</th>
-                                <th style="padding:10px 8px; width:100px;"></th>
-                            </tr>
-                        </thead>
-                        <tbody id="picking-rutas-tbody">
-                            <tr><td colspan="5" style="text-align:center; padding:20px; color:#94a3b8;"><i class="fa-solid fa-spinner fa-spin"></i> Cargando rutas...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Route Navigation Overlay (Mock) -->
-            <div id="picking-nav-container" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:white; z-index:200; padding:20px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
-                    <h4 style="margin:0;">Navegador de Picking</h4>
-                    <button class="btn-primary" style="width:auto; background:#ef4444;" onclick="document.getElementById('picking-nav-container').style.display='none'">Salir</button>
-                </div>
-                
-                <div style="background:#0f172a; color:white; border-radius:12px; padding:25px; text-align:center; margin-bottom:20px;">
-                    <div style="font-size:0.75rem; color:#94a3b8; text-transform:uppercase;">Diríjase a la Ubicación</div>
-                    <div id="pick-next-ubi" style="font-size:2.5rem; font-weight:800; margin:10px 0;">A-01-B2</div>
-                    <div id="pick-next-prod" style="font-size:1.1rem; color:#cbd5e1;">Producto ejemplo</div>
-                </div>
-
-                <div class="input-group">
-                    <label>Confirme escaneando Ubicación / EAN</label>
-                    <input type="text" id="pick-scan-confirm" class="input-field" placeholder="Escanee para confirmar">
-                </div>
-                
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; background:#f8fafc; padding:15px; border-radius:8px;">
-                    <div>Progreso: <strong id="pick-progress">1 / 10</strong></div>
-                    <button class="btn-primary" style="width:auto;" onclick="window.Picking.confirmStep()">Confirmar y Siguiente</button>
-                </div>
-            </div>
-        `;
+    init() {
+        console.log('Picking inicializado');
     },
-
-    loadPickingRutas: async function() {
-        const tbody = document.getElementById('picking-rutas-tbody');
-        if(!tbody) return;
-        try {
-            // Mock data since we need actual orders in DB to test FEFO logic
-            const data = [
-                { id: 1, numero: 'OP-1001', cliente: 'Cliente A', items: 5, estado: 'Pendiente' },
-                { id: 2, numero: 'OP-1002', cliente: 'Cliente B', items: 12, estado: 'EnProceso' }
-            ];
-            let html = '';
-            data.forEach(o => {
-                html += `
-                    <tr style="border-bottom:1px solid #f1f5f9;">
-                        <td style="padding:12px 8px; font-weight:600;">${o.numero}</td>
-                        <td style="padding:12px 8px; color:#475569;">${o.cliente}</td>
-                        <td style="padding:12px 8px;">${o.items} SKU</td>
-                        <td style="padding:12px 8px;"><span style="color:#f59e0b;">● ${o.estado}</span></td>
-                        <td style="padding:12px 8px; text-align:right;">
-                            <button class="btn-primary" style="padding:4px 10px; font-size:0.75rem; width:auto;" onclick="window.Picking.startNav(${o.id})">Empezar</button>
-                        </td>
-                    </tr>
-                `;
-            });
-            tbody.innerHTML = html;
-        } catch(e) {}
-    },
-
-    startNav: function(id) {
-        document.getElementById('picking-nav-container').style.display = 'block';
-        // Logic to fetch the Route generated by backend and show first step
-    },
-
-    confirmStep: function() {
-        window.showToast('Item confirmado', 'success');
-        // Logic to move to next step in route
+    crearBatch(archivo) {
+        console.log('Crear batch', archivo);
     }
 };
